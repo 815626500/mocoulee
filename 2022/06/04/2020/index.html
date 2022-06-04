@@ -16,23 +16,19 @@
   <meta name="author" content="林克">
   <meta name="keywords" content="">
   
-    <meta name="description" content="双重检查锁定若不使用volatile，两个线程同时访问getInstance()方法，其中一个线程正在初始化对象，另一个线程检查instance不为空。初始化可以理解为：1.分配对象的内存空间；2.初始化对象；3.设置instance指向刚分配的内存地址。2和3操作可能被重排序，此时初始化操作并未完成，使用volatile关键字可以禁止重排序。 12345678910111213141516pub">
-<meta property="og:type" content="article">
-<meta property="og:title" content="延迟加载和单例">
-<meta property="og:url" content="https://www.mocoulee.xyz/2022/06/02/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8D%95%E4%BE%8B/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="2020">
+<meta property="og:url" content="https://www.mocoulee.xyz/2022/06/04/2020/index.html">
 <meta property="og:site_name" content="小乐园">
-<meta property="og:description" content="双重检查锁定若不使用volatile，两个线程同时访问getInstance()方法，其中一个线程正在初始化对象，另一个线程检查instance不为空。初始化可以理解为：1.分配对象的内存空间；2.初始化对象；3.设置instance指向刚分配的内存地址。2和3操作可能被重排序，此时初始化操作并未完成，使用volatile关键字可以禁止重排序。 12345678910111213141516pub">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-02T15:34:39.000Z">
-<meta property="article:modified_time" content="2022-06-03T02:16:26.576Z">
+<meta property="article:published_time" content="2022-06-04T04:46:00.000Z">
+<meta property="article:modified_time" content="2022-06-04T04:46:00.609Z">
 <meta property="article:author" content="林克">
-<meta property="article:tag" content="单例">
-<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>延迟加载和单例 - 小乐园</title>
+  <title>2020 - 小乐园</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="延迟加载和单例"></span>
+            <span id="subtitle" data-typed-text="2020"></span>
           
         </div>
 
@@ -206,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-02 23:34" pubdate>
-          2022年6月2日 晚上
+        <time datetime="2022-06-04 12:46" pubdate>
+          2022年6月4日 下午
         </time>
       </span>
     
@@ -218,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          930 字
+          0 字
         
       </span>
     
@@ -229,7 +225,7 @@
         
         
         
-          3 分钟
+          1 分钟
         
       </span>
     
@@ -267,18 +263,11 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">延迟加载和单例</h1>
+            <h1 style="display: none">2020</h1>
             
             <div class="markdown-body">
               
-              <p>双重检查锁定<br>若不使用volatile，两个线程同时访问getInstance()方法，其中一个线程正在初始化对象，<br>另一个线程检查instance不为空。<br>初始化可以理解为：<br>1.分配对象的内存空间；<br>2.初始化对象；<br>3.设置instance指向刚分配的内存地址。<br>2和3操作可能被重排序，此时初始化操作并未完成，使用volatile关键字可以禁止重排序。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DoubleCheckedLocking</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Instance instance;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance <span class="hljs-title">getInstance</span>()</span>&#123;<br>        <span class="hljs-keyword">if</span>(instance==<span class="hljs-literal">null</span>)&#123;<br>            synchronized (DoubleCheckedLocking.<span class="hljs-keyword">class</span>)&#123;<br>                <span class="hljs-keyword">if</span>(instance==<span class="hljs-literal">null</span>)&#123;<br>                    instance=<span class="hljs-keyword">new</span> Instance();<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>基于类初始化的解决方案<br>JVM在类的初始化阶段，会执行类的初始化，期间JVM会去获取一个锁。<br>这个锁可以同步多个线程对同一个类的初始化。</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InstanceFactory</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Instance</span></span>&#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance instance=<span class="hljs-keyword">new</span> <span class="hljs-type">Instance</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Instance getInstance()&#123;<br>        <span class="hljs-keyword">return</span> Singleton.instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>单例</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton instance=<span class="hljs-keyword">new</span> Singleton();<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span>()</span>&#123;&#125;<br>&#125;<br><br><span class="hljs-comment">//使用枚举单例</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">enum</span> Singleton &#123;<br>    INSTANCE;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>《Java并发编程的艺术》<br>《Effective Java》</p>
-
+              
               
             </div>
             <hr/>
@@ -295,7 +284,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%85%B6%E4%BB%96/" class="category-chain-item">其他</a>
+  <a href="/categories/%E7%94%9F%E6%B4%BB/" class="category-chain-item">生活</a>
   
   
 
@@ -307,15 +296,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%8D%95%E4%BE%8B/">#单例</a>
-      
-        <a href="/tags/Java/">#Java</a>
-      
-    </div>
-  
 </div>
 
 
@@ -324,8 +304,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>延迟加载和单例</div>
-      <div>https://www.mocoulee.xyz/2022/06/02/延迟加载和单例/</div>
+      <div>2020</div>
+      <div>https://www.mocoulee.xyz/2022/06/04/2020/</div>
     </div>
     <div class="license-meta">
       
@@ -337,7 +317,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年6月2日</div>
+          <div>2022年6月4日</div>
         </div>
       
       
@@ -367,9 +347,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/03/2022-1/" title="2022">
+                      <a href="/2022/06/04/2019/" title="2019">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2022</span>
+                        <span class="hidden-mobile">2019</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +357,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/02/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/06/04/2021/" title="2021">
+                        <span class="hidden-mobile">2021</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
