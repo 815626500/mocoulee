@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -19,7 +19,7 @@
     <meta name="description" content="双重检查锁定若不使用volatile，两个线程同时访问getInstance()方法，其中一个线程正在初始化对象，另一个线程检查instance不为空。初始化可以理解为：1.分配对象的内存空间；2.初始化对象；3.设置instance指向刚分配的内存地址。2和3操作可能被重排序，此时初始化操作并未完成，使用volatile关键字可以禁止重排序。 12345678910111213141516pub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="延迟加载和单例">
-<meta property="og:url" content="https://815626500.github.io/2022/06/02/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8D%95%E4%BE%8B/index.html">
+<meta property="og:url" content="https://www.mocoulee.xyz/2022/06/02/%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8D%95%E4%BE%8B/index.html">
 <meta property="og:site_name" content="小乐园">
 <meta property="og:description" content="双重检查锁定若不使用volatile，两个线程同时访问getInstance()方法，其中一个线程正在初始化对象，另一个线程检查instance不为空。初始化可以理解为：1.分配对象的内存空间；2.初始化对象；3.设置instance指向刚分配的内存地址。2和3操作可能被重排序，此时初始化操作并未完成，使用volatile关键字可以禁止重排序。 12345678910111213141516pub">
 <meta property="og:locale" content="zh_CN">
@@ -70,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"815626500.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"www.mocoulee.xyz","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":200,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -229,7 +229,7 @@
         
         
         
-          8 分钟
+          3 分钟
         
       </span>
     
@@ -325,7 +325,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>延迟加载和单例</div>
-      <div>https://815626500.github.io/2022/06/02/延迟加载和单例/</div>
+      <div>https://www.mocoulee.xyz/2022/06/02/延迟加载和单例/</div>
     </div>
     <div class="license-meta">
       
