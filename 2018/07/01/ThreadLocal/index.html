@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="小乐园">
 <meta property="og:description" content="为什么ThreadLocal可以避免线程冲突？ ThreadLocal类里面有一个内部类ThreadLocalMap ThreadLocalMap类里面也存在一个内部类Entry，同时Entry继承WeakReference，弱引用对象每次GC时会被回收。Entry.value实际上是我们存在ThreadLocal里面的值 Thread类里面有一个成员变量ThreadLocal.ThreadLoc">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.mocoulee.xyz/img/2.png">
 <meta property="article:published_time" content="2018-07-01T15:34:13.000Z">
-<meta property="article:modified_time" content="2022-06-04T04:42:22.226Z">
+<meta property="article:modified_time" content="2022-06-04T05:18:31.942Z">
 <meta property="article:author" content="莫古力">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.mocoulee.xyz/img/2.png">
   
   
   
@@ -396,6 +398,31 @@
             </div>
 
             
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://www.mocoulee.xyz/2018/07/01/ThreadLocal/';
+          this.page.identifier = '/2018/07/01/ThreadLocal/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
           </article>
         </div>
       </div>
